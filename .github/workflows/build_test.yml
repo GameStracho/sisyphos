@@ -1,0 +1,121 @@
+name: 🛠️ Build & Test
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-test:
+    name: Build & Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            configure_preset: debug
+            build_preset: debug-build
+            test_preset: debug-test
+          - os: windows-latest
+            configure_preset: debug-windows
+            build_preset: debug-windows-build
+            test_preset: debug-windows-test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up MSVC environment
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Cache vcpkg packages
+        uses: actions/cache@v4
+        with:
+          path: third-party/vcpkg_installed
+          key: vcpkg-${{ matrix.os }}-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            vcpkg-${{ matrix.os }}-
+
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libx11-dev \
+            libxrandr-dev \
+            libxinerama-dev \
+            libxcursor-dev \
+            libxi-dev \
+            libxext-dev \
+            libxkbcommon-dev \
+            libgl-dev \
+            libasound2-dev \
+            autoconf \
+            autoconf-archive \
+            automake \
+            libtool \
+            pkg-config
+
+      - name: Configure
+        run: cmake --preset ${{ matrix.configure_preset }}
+
+      - name: Build
+        run: cmake --build --preset ${{ matrix.build_preset }}
+
+      - name: Test
+        run: ctest --preset ${{ matrix.test_preset }}
+
+  bump-dev-version:
+    name: Bump Dev Version
+    needs: build-test
+    runs-on: ubuntu-latest
+    # Only run on direct pushes to develop, not on PRs.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/develop'
+
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      # Dry-run: compute what the next release version will be without tagging.
+      - name: Compute next version
+        id: tag
+        uses: mathieudutour/github-tag-action@v6.2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          default_bump: patch
+          dry_run: true
+
+      - name: Update CMakeLists.txt
+        run: |
+          NEW_VERSION="${{ steps.tag.outputs.new_tag }}"
+          NEW_VERSION="${NEW_VERSION#v}"
+          sed -i "s/project(sisyphos VERSION [0-9][^ ]*/project(sisyphos VERSION ${NEW_VERSION}/" CMakeLists.txt
+
+      - name: Update vcpkg.json
+        run: |
+          NEW_VERSION="${{ steps.tag.outputs.new_tag }}"
+          NEW_VERSION="${NEW_VERSION#v}"
+          jq --arg ver "${NEW_VERSION}" '.version = $ver' vcpkg.json > vcpkg.tmp.json
+          mv vcpkg.tmp.json vcpkg.json
+
+      - name: Commit and push dev version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add CMakeLists.txt vcpkg.json
+          git diff --staged --quiet || git commit -m "chore: bump version to ${{ steps.tag.outputs.new_tag }} [skip ci]"
+          git push
