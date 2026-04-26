@@ -2,8 +2,6 @@ file(GLOB_RECURSE ENGINE_SOURCES CONFIGURE_DEPENDS
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp"
 )
 
-# When source files exist, list them explicitly; GLOB_RECURSE handles
-# the empty-directory case until then.
 add_library(sisyphos_engine STATIC ${ENGINE_SOURCES})
 
 target_include_directories(sisyphos_engine
