@@ -40,8 +40,10 @@ git clone https://github.com/GameStracho/sisyphos.git
 cd sisyphos
 
 # 2. Configure
-cmake --preset debug     # Debug build (editor + launcher + tests)
-cmake --preset release   # Optimised release build
+cmake --preset debug            # Debug — editor + launcher + tests (Linux/macOS)
+cmake --preset release          # Release                           (Linux/macOS)
+cmake --preset debug-windows    # Debug                             (Windows/Ninja)
+cmake --preset release-windows  # Release                           (Windows/Ninja)
 
 # Launcher-only presets (no editor / ImGui dependency)
 cmake --preset debug-launcher
@@ -50,9 +52,12 @@ cmake --preset release-launcher
 # 3. Build
 cmake --build --preset debug-build
 cmake --build --preset release-build
+cmake --build --preset debug-windows-build
+cmake --build --preset release-windows-build
 
 # 4. Run tests
 ctest --preset debug-test
+ctest --preset debug-windows-test
 ```
 
 ---

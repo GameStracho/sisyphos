@@ -43,6 +43,18 @@
                 "BUILD_EDITOR": "OFF",
                 "BUILD_TESTING": "OFF"
             }
+        },
+        {
+            "name": "debug-windows",
+            "displayName": "Debug (Windows / Ninja)",
+            "inherits": "debug",
+            "generator": "Ninja"
+        },
+        {
+            "name": "release-windows",
+            "displayName": "Release (Windows / Ninja)",
+            "inherits": "release",
+            "generator": "Ninja"
         }
     ],
     "buildPresets": [
@@ -55,6 +67,16 @@
             "name": "release-build",
             "displayName": "Build Release",
             "configurePreset": "release"
+        },
+        {
+            "name": "debug-windows-build",
+            "displayName": "Build Debug (Windows)",
+            "configurePreset": "debug-windows"
+        },
+        {
+            "name": "release-windows-build",
+            "displayName": "Build Release (Windows)",
+            "configurePreset": "release-windows"
         }
     ],
     "testPresets": [
@@ -62,6 +84,14 @@
             "name": "debug-test",
             "displayName": "Test Debug",
             "configurePreset": "debug",
+            "output": {
+                "outputOnFailure": true
+            }
+        },
+        {
+            "name": "debug-windows-test",
+            "displayName": "Test Debug (Windows)",
+            "configurePreset": "debug-windows",
             "output": {
                 "outputOnFailure": true
             }

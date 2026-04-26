@@ -1,0 +1,64 @@
+name: 🛠️ Build & Test
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  build-test:
+    name: Build & Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+
+    permissions:
+      contents: read
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            configure_preset: debug
+            build_preset: debug-build
+            test_preset: debug-test
+          - os: windows-latest
+            configure_preset: debug-windows
+            build_preset: debug-windows-build
+            test_preset: debug-windows-test
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Set up MSVC environment
+        if: runner.os == 'Windows'
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Bootstrap vcpkg
+        shell: bash
+        run: |
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            ./third-party/vcpkg/bootstrap-vcpkg.bat -disableMetrics
+          else
+            ./third-party/vcpkg/bootstrap-vcpkg.sh -disableMetrics
+          fi
+
+      - name: Cache vcpkg packages
+        uses: actions/cache@v4
+        with:
+          path: third-party/vcpkg_installed
+          key: vcpkg-${{ matrix.os }}-${{ hashFiles('vcpkg.json') }}
+          restore-keys: |
+            vcpkg-${{ matrix.os }}-
+
+      - name: Configure
+        run: cmake --preset ${{ matrix.configure_preset }}
+
+      - name: Build
+        run: cmake --build --preset ${{ matrix.build_preset }}
+
+      - name: Test
+        run: ctest --preset ${{ matrix.test_preset }}
