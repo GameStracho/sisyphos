@@ -13,4 +13,4 @@ target_link_libraries(sisyphos_tests
 )
 
 # Automatically registers each TEST() as a CTest case.
-gtest_discover_tests(sisyphos_tests)
+gtest_discover_tests(sisyphos_tests DISCOVERY_MODE PRE_TEST)
