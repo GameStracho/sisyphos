@@ -73,8 +73,10 @@ if(BUILD_LAUNCHER)
     add_subdirectory(src/launcher)
 endif()
 
+enable_testing()
+include(CTest)
+
 if(BUILD_TESTING)
     find_package(GTest CONFIG REQUIRED)
-    enable_testing()
     add_subdirectory(tests)
 endif()
