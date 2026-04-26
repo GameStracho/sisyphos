@@ -24,7 +24,8 @@
             "inherits": "base",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_INTERPROCEDURAL_OPTIMIZATION": "ON"
+                "CMAKE_INTERPROCEDURAL_OPTIMIZATION": "ON",
+                "BUILD_TESTING": "OFF"
             }
         },
         {
