@@ -8,7 +8,8 @@ add_executable(sisyphos_editor ${EDITOR_SOURCES})
 
 # WIN32 suppresses the console window on Windows release builds.
 if(WIN32)
-    set_target_properties(sisyphos_editor PROPERTIES WIN32_EXECUTABLE TRUE)
+    set_target_properties(sisyphos_editor PROPERTIES WIN32_EXECUTABLE $<CONFIG:Release>)
+    target_link_options(sisyphos_editor PRIVATE $<$<CONFIG:Release>:/ENTRY:mainCRTStartup>)
 endif()
 
 target_include_directories(sisyphos_editor
