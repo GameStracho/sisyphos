@@ -93,15 +93,6 @@ jobs:
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
 
-      - name: Bootstrap vcpkg
-        shell: bash
-        run: |
-          if [[ "$RUNNER_OS" == "Windows" ]]; then
-            ./third-party/vcpkg/bootstrap-vcpkg.bat -disableMetrics
-          else
-            ./third-party/vcpkg/bootstrap-vcpkg.sh -disableMetrics
-          fi
-
       - name: Cache vcpkg packages
         uses: actions/cache@v4
         with:
