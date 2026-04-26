@@ -104,6 +104,17 @@ jobs:
           restore-keys: |
             vcpkg-${{ matrix.os }}-
 
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            libx11-dev \
+            libxrandr-dev \
+            libxinerama-dev \
+            libxcursor-dev \
+            libxi-dev
+
       - name: Configure
         run: cmake --preset ${{ matrix.configure_preset }}
 
