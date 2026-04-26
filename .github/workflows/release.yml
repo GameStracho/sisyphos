@@ -119,6 +119,7 @@ jobs:
             libgl-dev \
             libasound2-dev \
             autoconf \
+            autoconf-archive \
             automake \
             libtool \
             pkg-config
