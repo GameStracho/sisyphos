@@ -96,6 +96,11 @@ jobs:
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
 
+      - name: Install Ninja (Windows)
+        if: runner.os == 'Windows'
+        run: choco install ninja --yes --no-progress
+        shell: pwsh
+
       - name: Cache vcpkg packages
         uses: actions/cache@v4
         with:
