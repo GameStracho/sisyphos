@@ -13,6 +13,7 @@ jobs:
 
     permissions:
       contents: read
+      actions: write   # required for vcpkg GHA binary cache writes
 
     strategy:
       fail-fast: false
@@ -37,13 +38,32 @@ jobs:
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
 
-      - name: Cache vcpkg packages
+      - name: Install Ninja (Windows)
+        if: runner.os == 'Windows'
+        run: choco install ninja --yes --no-progress
+        shell: pwsh
+
+      # Export the two environment variables vcpkg needs to talk to the GHA
+      # binary cache. Pre-built package archives are stored there so vcpkg
+      # downloads them instead of compiling from source on every run.
+      - name: Export vcpkg binary cache credentials
+        uses: actions/github-script@v7
+        with:
+          script: |
+            core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
+            core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
+
+      # Cache the installed packages directory. When the key hits, CMake sees
+      # everything already installed and skips vcpkg entirely (~instant).
+      # When the key misses, the binary cache above supplies pre-built archives
+      # so only new/changed packages are compiled.
+      - name: Cache vcpkg installed packages
         uses: actions/cache@v4
         with:
           path: third-party/vcpkg_installed
-          key: vcpkg-${{ matrix.os }}-${{ hashFiles('vcpkg.json') }}
+          key: vcpkg-installed-${{ matrix.os }}-${{ hashFiles('vcpkg.json', 'cmake/vcpkg.cmake') }}
           restore-keys: |
-            vcpkg-${{ matrix.os }}-
+            vcpkg-installed-${{ matrix.os }}-
 
       - name: Install Linux dependencies
         if: runner.os == 'Linux'
@@ -66,6 +86,8 @@ jobs:
             pkg-config
 
       - name: Configure
+        env:
+          VCPKG_BINARY_SOURCES: "clear;x-gha,readwrite"
         run: cmake --preset ${{ matrix.configure_preset }}
 
       - name: Build

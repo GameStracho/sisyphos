@@ -1,0 +1,38 @@
+services:
+  docs-website:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "${WEBSITE_PORT:-8080}:80"
+    restart: unless-stopped
+    profiles:
+      - develop
+      - public
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    command: tunnel --no-autoupdate run --token ${CLOUDFLARE_TUNNEL_TOKEN}
+    restart: unless-stopped
+    depends_on:
+      - docs-website
+    profiles:
+      - public
+
+  webhook-listener:
+    image: almir/webhook
+    ports:
+      - "${WEBHOOK_PORT:-9000}:9000"
+    volumes:
+      - ./scripts/hooks.json:/etc/webhook/hooks.json:ro
+      - ./scripts/redeploy.sh:/scripts/redeploy.sh:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - .:/repo:ro
+    environment:
+      - WEBHOOK_SECRET=${WEBHOOK_SECRET}
+    command: -hooks /etc/webhook/hooks.json -verbose
+    restart: unless-stopped
+    depends_on:
+      - docs-website
+    profiles:
+      - public

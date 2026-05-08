@@ -2,13 +2,12 @@
 
 [![Build & Test](https://github.com/GameStracho/sisyphos/actions/workflows/build_test.yml/badge.svg)](https://github.com/GameStracho/sisyphos/actions/workflows/build_test.yml)
 [![Release](https://github.com/GameStracho/sisyphos/actions/workflows/release.yml/badge.svg)](https://github.com/GameStracho/sisyphos/actions/workflows/release.yml)
-[![License](https://img.shields.io/github/license/GameStracho/sisyphos)](LICENSE)
+[![License](https://img.shields.io/github/license/GameStracho/sisyphos)](https://github.com/GameStracho/sisyphos/blob/main/LICENSE)
 [![Version](https://img.shields.io/github/v/release/GameStracho/sisyphos)](https://github.com/GameStracho/sisyphos/releases)
-![Documentation](https://img.shields.io/badge/documentation-MkDocs-%23526CFE?logo=materialformkdocs&link=https%3A%2F%2Fsisyphos.strachy.win%2F)
 
 A universal, data-driven C++ game engine designed for building portable game SDKs with runtime Lua scripting.
 
-The engine is intentionally free of game-specific logic — all game rules live in Lua scripts, assets are loaded from an external project folder, and the compiled SDK can be shipped as a plain ZIP archive. For a deeper look at design decisions see [docs/internals/ARCHITECTURE.md](docs/internals/ARCHITECTURE.md).
+The engine is intentionally free of game-specific logic — all game rules live in Lua scripts, assets are loaded from an external project folder, and the compiled SDK can be shipped as a plain ZIP archive.
 
 ---
 
@@ -53,12 +52,9 @@ cmake --preset release-launcher
 # 3. Build
 cmake --build --preset debug-build
 cmake --build --preset release-build
-cmake --build --preset debug-windows-build
-cmake --build --preset release-windows-build
 
 # 4. Run tests
 ctest --preset debug-test
-ctest --preset debug-windows-test
 ```
 
 ---
@@ -77,8 +73,6 @@ games/
     └── config.json   # User settings — created automatically at first launch
 ```
 
-Open the editor, point it at a `project.json`, and the engine resolves all paths relative to that file. The `games/` folder is excluded from the engine's compiled output — your game project can live anywhere on disk.
-
 ---
 
 ## Contributing
@@ -91,10 +85,4 @@ This project follows a simplified **GitFlow**:
 | `develop`     | Integration branch for completed features   |
 | `feat/<name>` | Short-lived feature branches, merged via PR |
 
-Commit messages must follow [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `feat!:` for breaking changes). Every PR to `main` is gated by the CI pipeline (build + Google Test). A GitHub Release and SDK artifact are created automatically on merge.
-
----
-
-## License
-
-See [LICENSE](LICENSE).
+Commit messages follow [Conventional Commits](https://www.conventionalcommits.org/) (`feat:`, `fix:`, `feat!:` for breaking changes). Every PR to `main` is gated by the CI pipeline (build + Google Test).
