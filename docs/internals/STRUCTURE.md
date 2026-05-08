@@ -1,3 +1,4 @@
+```
 /sisyphos (Root)
 ├── .github/                 # Automation
 │   └── workflows/
@@ -34,6 +35,7 @@
 ├── .mkdocs.yml              # MkDocs configuration
 ├── README.md                # Project welcome page
 └── CHANGELOG.md             # Automatically generated list of changes
+```
 
 # Key points of this structure:
 - **Separation** of the `engine` **and** `editor`: The editor is merely a "client" of the engine. This enables easy creation of a `launcher` (for players) later on that won't include the editor's cumbersome ImGui interface.
