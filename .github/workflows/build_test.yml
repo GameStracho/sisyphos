@@ -53,6 +53,18 @@ jobs:
             core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
             core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
+      # Cache the installed packages directory. When the key hits, CMake sees
+      # everything already installed and skips vcpkg entirely (~instant).
+      # When the key misses, the binary cache above supplies pre-built archives
+      # so only new/changed packages are compiled.
+      - name: Cache vcpkg installed packages
+        uses: actions/cache@v4
+        with:
+          path: third-party/vcpkg_installed
+          key: vcpkg-installed-${{ matrix.os }}-${{ hashFiles('vcpkg.json', 'cmake/vcpkg.cmake') }}
+          restore-keys: |
+            vcpkg-installed-${{ matrix.os }}-
+
       - name: Install Linux dependencies
         if: runner.os == 'Linux'
         run: |

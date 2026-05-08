@@ -109,6 +109,14 @@ jobs:
             core.exportVariable('ACTIONS_CACHE_URL', process.env.ACTIONS_CACHE_URL || '');
             core.exportVariable('ACTIONS_RUNTIME_TOKEN', process.env.ACTIONS_RUNTIME_TOKEN || '');
 
+      - name: Cache vcpkg installed packages
+        uses: actions/cache@v4
+        with:
+          path: third-party/vcpkg_installed
+          key: vcpkg-installed-${{ matrix.os }}-${{ hashFiles('vcpkg.json', 'cmake/vcpkg.cmake') }}
+          restore-keys: |
+            vcpkg-installed-${{ matrix.os }}-
+
       - name: Install Linux dependencies
         if: runner.os == 'Linux'
         run: |
