@@ -1,0 +1,101 @@
+{
+    "version": 3,
+    "configurePresets": [
+        {
+            "name": "base",
+            "hidden": true,
+            "generator": "Unix Makefiles",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "cacheVariables": {
+                "VCPKG_INSTALLED_DIR": "${sourceDir}/third-party/vcpkg_installed"
+            }
+        },
+        {
+            "name": "debug",
+            "displayName": "Debug",
+            "inherits": "base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Debug"
+            }
+        },
+        {
+            "name": "release",
+            "displayName": "Release",
+            "inherits": "base",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_INTERPROCEDURAL_OPTIMIZATION": "ON",
+                "BUILD_TESTING": "OFF"
+            }
+        },
+        {
+            "name": "debug-launcher",
+            "displayName": "Launcher Debug",
+            "inherits": "debug",
+            "cacheVariables": {
+                "BUILD_EDITOR": "OFF"
+            }
+        },
+        {
+            "name": "release-launcher",
+            "displayName": "Launcher Release",
+            "inherits": "release",
+            "cacheVariables": {
+                "BUILD_EDITOR": "OFF",
+                "BUILD_TESTING": "OFF"
+            }
+        },
+        {
+            "name": "debug-windows",
+            "displayName": "Debug (Windows / Ninja)",
+            "inherits": "debug",
+            "generator": "Ninja"
+        },
+        {
+            "name": "release-windows",
+            "displayName": "Release (Windows / Ninja)",
+            "inherits": "release",
+            "generator": "Ninja"
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "debug-build",
+            "displayName": "Build Debug",
+            "configurePreset": "debug"
+        },
+        {
+            "name": "release-build",
+            "displayName": "Build Release",
+            "configurePreset": "release"
+        },
+        {
+            "name": "debug-windows-build",
+            "displayName": "Build Debug (Windows)",
+            "configurePreset": "debug-windows"
+        },
+        {
+            "name": "release-windows-build",
+            "displayName": "Build Release (Windows)",
+            "configurePreset": "release-windows"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "debug-test",
+            "displayName": "Test Debug",
+            "configurePreset": "debug",
+            "output": {
+                "outputOnFailure": true
+            }
+        },
+        {
+            "name": "debug-windows-test",
+            "displayName": "Test Debug (Windows)",
+            "configurePreset": "debug-windows",
+            "output": {
+                "outputOnFailure": true
+            }
+        }
+    ]
+}
