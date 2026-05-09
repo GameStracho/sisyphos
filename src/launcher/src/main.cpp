@@ -1,10 +1,18 @@
 // glad must be included before any other GL/GLFW headers.
 #include <glad/glad.h>
 
+#include <spdlog/spdlog.h>
+
 #include "window.hpp"
 
 int main()
 {
+#ifdef NDEBUG
+    spdlog::set_level(spdlog::level::info);
+#else
+    spdlog::set_level(spdlog::level::debug);
+#endif
+
     sisyphos::Window window{1280, 720, "Sisyphos"};
 
     while (!window.shouldClose())
