@@ -59,6 +59,7 @@ find_package(glad         CONFIG REQUIRED)
 find_package(assimp       CONFIG REQUIRED)
 find_package(cereal       CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
+find_package(spdlog       CONFIG REQUIRED)
 
 # ---------------------------------------------------------------------------
 # Targets
