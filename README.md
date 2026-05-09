@@ -4,7 +4,7 @@
 [![Release](https://github.com/GameStracho/sisyphos/actions/workflows/release.yml/badge.svg)](https://github.com/GameStracho/sisyphos/actions/workflows/release.yml)
 [![License](https://img.shields.io/github/license/GameStracho/sisyphos)](LICENSE)
 [![Version](https://img.shields.io/github/v/release/GameStracho/sisyphos)](https://github.com/GameStracho/sisyphos/releases)
-![Documentation](https://img.shields.io/badge/documentation-MkDocs-%23526CFE?logo=materialformkdocs&link=https%3A%2F%2Fsisyphos.strachy.win%2F)
+[![Documentation](https://img.shields.io/badge/documentation-MkDocs-%23526CFE?logo=materialformkdocs)](https://sisyphos.strachy.win/)
 
 A universal, data-driven C++ game engine designed for building portable game SDKs with runtime Lua scripting.
 

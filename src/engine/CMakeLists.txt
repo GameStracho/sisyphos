@@ -25,6 +25,7 @@ target_link_libraries(sisyphos_engine
         assimp::assimp
         cereal::cereal
         nlohmann_json::nlohmann_json
+        spdlog::spdlog
         sisyphos_sanitizers
 )
 

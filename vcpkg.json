@@ -21,6 +21,7 @@
     "assimp",
     "cereal",
     "nlohmann-json",
+    "spdlog",
     "gtest"
   ]
 }
