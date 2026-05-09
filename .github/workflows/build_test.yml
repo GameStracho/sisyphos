@@ -125,7 +125,9 @@ jobs:
         run: |
           NEW_VERSION="${{ steps.tag.outputs.new_tag }}"
           NEW_VERSION="${NEW_VERSION#v}"
-          sed -i "s/project(sisyphos VERSION [0-9][^ ]*/project(sisyphos VERSION ${NEW_VERSION}/" CMakeLists.txt
+          # CMake project() VERSION only accepts X.Y.Z — strip any pre-release suffix
+          CMAKE_VERSION="${NEW_VERSION%%-*}"
+          sed -i "s/project(sisyphos VERSION [0-9][^ ]*/project(sisyphos VERSION ${CMAKE_VERSION}/" CMakeLists.txt
 
       - name: Update vcpkg.json
         run: |

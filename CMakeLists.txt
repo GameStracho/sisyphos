@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.25)
 # during the first CMake configure run.
 include(cmake/vcpkg.cmake)
 
-project(sisyphos VERSION 0.0.1-develop.0 LANGUAGES CXX)
+project(sisyphos VERSION 0.0.1 LANGUAGES CXX)
 
 # ---------------------------------------------------------------------------
 # Global C++ standard
