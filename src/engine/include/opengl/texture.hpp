@@ -19,7 +19,7 @@ public:
     ///                        corrects for OpenGL's bottom-left origin).
     explicit Texture(
         const std::filesystem::path& path,
-        TextureTarget target = TextureTarget::Texture2D,
+        ETextureTarget target = ETextureTarget::Texture2D,
         bool flipVertically = true);
 
     ~Texture();
@@ -40,12 +40,12 @@ public:
     /// Sets the wrap mode for the S and T axes.
     /// @param s  Wrap mode for the horizontal (S / U) axis.
     /// @param t  Wrap mode for the vertical (T / V) axis.
-    void setWrap(TextureWrap s, TextureWrap t) const;
+    void setWrap(ETextureWrap s, ETextureWrap t) const;
 
     /// Sets the minification and magnification filter modes.
     /// @param min  Filter used when the texture is rendered smaller than its original size.
     /// @param mag  Filter used when the texture is rendered larger than its original size.
-    void setFilter(TextureFilter min, TextureFilter mag) const;
+    void setFilter(ETextureFilter min, ETextureFilter mag) const;
 
     /// Returns the width of the texture in pixels.
     [[nodiscard]] int getWidth() const { return m_width; }
@@ -58,7 +58,7 @@ public:
 
 private:
     GLuint m_id = 0;
-    TextureTarget m_target = TextureTarget::Texture2D;
+    ETextureTarget m_target = ETextureTarget::Texture2D;
     int m_width = 0;
     int m_height = 0;
 };

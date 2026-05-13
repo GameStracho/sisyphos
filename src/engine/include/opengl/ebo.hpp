@@ -30,7 +30,7 @@ public:
     /// @param size  Size in bytes of the data.
     /// @param usage GPU access hint (default: StaticDraw).
     void upload(const void* data, GLsizeiptr size,
-        BufferUsage usage = BufferUsage::StaticDraw);
+        EBufferUsage usage = EBufferUsage::StaticDraw);
 
     /// Returns the underlying OpenGL object ID.
     [[nodiscard]] GLuint getId() const { return m_id; }

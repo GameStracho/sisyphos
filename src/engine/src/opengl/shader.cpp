@@ -26,7 +26,7 @@ std::string loadFile(const std::filesystem::path& path)
 
 } // namespace
 
-Shader::Shader(ShaderStage stage, const std::filesystem::path& sourcePath)
+Shader::Shader(EShaderStage stage, const std::filesystem::path& sourcePath)
 {
     spdlog::debug("Compiling shader: {}", sourcePath.string());
 

@@ -11,7 +11,7 @@ namespace sisyphos::opengl
 
 Texture::Texture(
     const std::filesystem::path& path,
-    TextureTarget target,
+    ETextureTarget target,
     bool flipVertically)
     : m_target(target)
 {
@@ -107,14 +107,14 @@ void Texture::unbind() const
     glBindTexture(static_cast<GLenum>(m_target), 0);
 }
 
-void Texture::setWrap(TextureWrap s, TextureWrap t) const
+void Texture::setWrap(ETextureWrap s, ETextureWrap t) const
 {
     const GLenum target = static_cast<GLenum>(m_target);
     glTexParameteri(target, GL_TEXTURE_WRAP_S, static_cast<GLenum>(s));
     glTexParameteri(target, GL_TEXTURE_WRAP_T, static_cast<GLenum>(t));
 }
 
-void Texture::setFilter(TextureFilter min, TextureFilter mag) const
+void Texture::setFilter(ETextureFilter min, ETextureFilter mag) const
 {
     const GLenum target = static_cast<GLenum>(m_target);
     glTexParameteri(target, GL_TEXTURE_MIN_FILTER, static_cast<GLenum>(min));

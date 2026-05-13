@@ -12,7 +12,7 @@ namespace sisyphos::opengl
 // ---------------------------------------------------------------------------
 // Shader stage
 // ---------------------------------------------------------------------------
-enum class ShaderStage : GLenum
+enum class EShaderStage : GLenum
 {
     Vertex = GL_VERTEX_SHADER,
     Fragment = GL_FRAGMENT_SHADER,
@@ -25,7 +25,7 @@ enum class ShaderStage : GLenum
 // ---------------------------------------------------------------------------
 // Buffer usage hint
 // ---------------------------------------------------------------------------
-enum class BufferUsage : GLenum
+enum class EBufferUsage : GLenum
 {
     StaticDraw = GL_STATIC_DRAW,
     DynamicDraw = GL_DYNAMIC_DRAW,
@@ -35,7 +35,7 @@ enum class BufferUsage : GLenum
 // ---------------------------------------------------------------------------
 // Texture target
 // ---------------------------------------------------------------------------
-enum class TextureTarget : GLenum
+enum class ETextureTarget : GLenum
 {
     Texture2D = GL_TEXTURE_2D,
     Texture3D = GL_TEXTURE_3D,
@@ -46,7 +46,7 @@ enum class TextureTarget : GLenum
 // ---------------------------------------------------------------------------
 // Texture wrap mode
 // ---------------------------------------------------------------------------
-enum class TextureWrap : GLenum
+enum class ETextureWrap : GLenum
 {
     Repeat = GL_REPEAT,
     ClampToEdge = GL_CLAMP_TO_EDGE,
@@ -56,7 +56,7 @@ enum class TextureWrap : GLenum
 // ---------------------------------------------------------------------------
 // Texture filter mode
 // ---------------------------------------------------------------------------
-enum class TextureFilter : GLenum
+enum class ETextureFilter : GLenum
 {
     Nearest = GL_NEAREST,
     Linear = GL_LINEAR,
@@ -67,7 +67,7 @@ enum class TextureFilter : GLenum
 // ---------------------------------------------------------------------------
 // Pixel format
 // ---------------------------------------------------------------------------
-enum class PixelFormat : GLenum
+enum class EPixelFormat : GLenum
 {
     R = GL_RED,
     RG = GL_RG,
@@ -80,7 +80,7 @@ enum class PixelFormat : GLenum
 // ---------------------------------------------------------------------------
 // Framebuffer attachment point
 // ---------------------------------------------------------------------------
-enum class FramebufferAttachment : GLenum
+enum class EFramebufferAttachment : GLenum
 {
     Color0 = GL_COLOR_ATTACHMENT0,
     Color1 = GL_COLOR_ATTACHMENT1,
@@ -98,7 +98,7 @@ enum class FramebufferAttachment : GLenum
 // ---------------------------------------------------------------------------
 // Renderbuffer internal format
 // ---------------------------------------------------------------------------
-enum class RenderbufferFormat : GLenum
+enum class ERenderbufferFormat : GLenum
 {
     Depth24Stencil8 = GL_DEPTH24_STENCIL8,
     Depth32F = GL_DEPTH_COMPONENT32F,
@@ -108,7 +108,7 @@ enum class RenderbufferFormat : GLenum
 // ---------------------------------------------------------------------------
 // Vertex attribute component type (used by VAO::setAttribPointer)
 // ---------------------------------------------------------------------------
-enum class AttribType : GLenum
+enum class EAttribType : GLenum
 {
     Byte = GL_BYTE,
     UnsignedByte = GL_UNSIGNED_BYTE,
@@ -123,7 +123,7 @@ enum class AttribType : GLenum
 // ---------------------------------------------------------------------------
 // Primitive type for draw calls
 // ---------------------------------------------------------------------------
-enum class PrimitiveType : GLenum
+enum class EPrimitiveType : GLenum
 {
     Points = GL_POINTS,
     Lines = GL_LINES,
@@ -137,16 +137,16 @@ enum class PrimitiveType : GLenum
 // ---------------------------------------------------------------------------
 // Framebuffer clear mask — values can be combined with |
 // ---------------------------------------------------------------------------
-enum class ClearBit : GLbitfield
+enum class EClearBit : GLbitfield
 {
     Color = GL_COLOR_BUFFER_BIT,
     Depth = GL_DEPTH_BUFFER_BIT,
     Stencil = GL_STENCIL_BUFFER_BIT,
 };
 
-inline ClearBit operator|(ClearBit a, ClearBit b)
+inline EClearBit operator|(EClearBit a, EClearBit b)
 {
-    return static_cast<ClearBit>(static_cast<GLbitfield>(a) | static_cast<GLbitfield>(b));
+    return static_cast<EClearBit>(static_cast<GLbitfield>(a) | static_cast<GLbitfield>(b));
 }
 
 } // namespace sisyphos::opengl

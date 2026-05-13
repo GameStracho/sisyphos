@@ -14,7 +14,7 @@ public:
     /// @param format  Internal storage format.
     /// @param width   Width in pixels.
     /// @param height  Height in pixels.
-    RenderBuffer(RenderbufferFormat format, int width, int height);
+    RenderBuffer(ERenderbufferFormat format, int width, int height);
     ~RenderBuffer();
 
     RenderBuffer(const RenderBuffer&) = delete;
@@ -45,7 +45,7 @@ public:
 
 private:
     GLuint m_id = 0;
-    RenderbufferFormat m_format = RenderbufferFormat::Depth24Stencil8;
+    ERenderbufferFormat m_format = ERenderbufferFormat::Depth24Stencil8;
     int m_width = 0;
     int m_height = 0;
 };

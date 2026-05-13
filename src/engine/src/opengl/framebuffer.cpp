@@ -54,12 +54,12 @@ void Framebuffer::unbind() const
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
 }
 
-void Framebuffer::attachTexture(FramebufferAttachment attachment, const Texture& texture)
+void Framebuffer::attachTexture(EFramebufferAttachment attachment, const Texture& texture)
 {
     glNamedFramebufferTexture(m_id, static_cast<GLenum>(attachment), texture.getId(), 0);
 }
 
-void Framebuffer::attachRenderBuffer(FramebufferAttachment attachment, const RenderBuffer& renderBuffer)
+void Framebuffer::attachRenderBuffer(EFramebufferAttachment attachment, const RenderBuffer& renderBuffer)
 {
     glNamedFramebufferRenderbuffer(m_id, static_cast<GLenum>(attachment), GL_RENDERBUFFER, renderBuffer.getId());
 }

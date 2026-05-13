@@ -15,7 +15,7 @@ public:
     /// Loads and compiles a shader from a source file.
     /// @param stage       The pipeline stage this shader belongs to.
     /// @param sourcePath  Path to the GLSL source file.
-    Shader(ShaderStage stage, const std::filesystem::path& sourcePath);
+    Shader(EShaderStage stage, const std::filesystem::path& sourcePath);
     ~Shader();
 
     Shader(const Shader&) = delete;

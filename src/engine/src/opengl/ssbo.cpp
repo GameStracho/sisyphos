@@ -4,7 +4,7 @@
 namespace sisyphos::opengl
 {
 
-SSBO::SSBO(GLsizeiptr size, BufferUsage usage)
+SSBO::SSBO(GLsizeiptr size, EBufferUsage usage)
 {
     glGenBuffers(1, &m_id);
     glNamedBufferData(m_id, size, nullptr, static_cast<GLenum>(usage));

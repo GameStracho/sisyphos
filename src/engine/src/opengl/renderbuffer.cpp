@@ -4,7 +4,7 @@
 namespace sisyphos::opengl
 {
 
-RenderBuffer::RenderBuffer(RenderbufferFormat format, int width, int height)
+RenderBuffer::RenderBuffer(ERenderbufferFormat format, int width, int height)
     : m_format(format), m_width(width), m_height(height)
 {
     glGenRenderbuffers(1, &m_id);

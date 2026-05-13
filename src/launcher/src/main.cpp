@@ -36,19 +36,19 @@ int main()
     vbo.upload(vertices, sizeof(vertices));
 
     // attribute 0 — position
-    vao.setAttribPointer(0, 3, sisyphos::opengl::AttribType::Float, false,
+    vao.setAttribPointer(0, 3, sisyphos::opengl::EAttribType::Float, false,
                          5 * sizeof(float), reinterpret_cast<const void*>(0));
     vao.enableAttrib(0);
 
     // attribute 1 — UV
-    vao.setAttribPointer(1, 2, sisyphos::opengl::AttribType::Float, false,
+    vao.setAttribPointer(1, 2, sisyphos::opengl::EAttribType::Float, false,
                          5 * sizeof(float), reinterpret_cast<const void*>(3 * sizeof(float)));
     vao.enableAttrib(1);
 
     vao.unbind();
 
-    sisyphos::opengl::Shader vert{sisyphos::opengl::ShaderStage::Vertex,   "shaders/triangle.vert"};
-    sisyphos::opengl::Shader frag{sisyphos::opengl::ShaderStage::Fragment, "shaders/triangle.frag"};
+    sisyphos::opengl::Shader vert{sisyphos::opengl::EShaderStage::Vertex,   "shaders/triangle.vert"};
+    sisyphos::opengl::Shader frag{sisyphos::opengl::EShaderStage::Fragment, "shaders/triangle.frag"};
     sisyphos::opengl::ShaderProgram program{vert.getId(), frag.getId()};
 
     sisyphos::opengl::Texture texture{"assets/test_texture.png"};
@@ -61,12 +61,12 @@ int main()
         window.pollEvents();
 
         sisyphos::opengl::setClearColor(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
-        sisyphos::opengl::clear(sisyphos::opengl::ClearBit::Color);
+        sisyphos::opengl::clear(sisyphos::opengl::EClearBit::Color);
 
         texture.bind(0);
 
         vao.bind();
-        sisyphos::opengl::drawArrays(sisyphos::opengl::PrimitiveType::Triangles, 0, 3);
+        sisyphos::opengl::drawArrays(sisyphos::opengl::EPrimitiveType::Triangles, 0, 3);
         vao.unbind();
 
         window.swapBuffers();

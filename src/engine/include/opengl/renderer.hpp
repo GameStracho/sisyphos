@@ -17,7 +17,7 @@ inline void setClearColor(glm::vec4 color)
 
 /// Clears the specified framebuffer buffers.
 /// @param bits  One or more ClearBit flags combined with | indicating which buffers to clear.
-inline void clear(ClearBit bits = ClearBit::Color)
+inline void clear(EClearBit bits = EClearBit::Color)
 {
     glClear(static_cast<GLbitfield>(bits));
 }
@@ -26,7 +26,7 @@ inline void clear(ClearBit bits = ClearBit::Color)
 /// @param primitive  The type of primitive to render.
 /// @param first      Index of the first vertex to draw.
 /// @param count      Number of vertices to draw.
-inline void drawArrays(PrimitiveType primitive, GLint first, GLsizei count)
+inline void drawArrays(EPrimitiveType primitive, GLint first, GLsizei count)
 {
     glDrawArrays(static_cast<GLenum>(primitive), first, count);
 }

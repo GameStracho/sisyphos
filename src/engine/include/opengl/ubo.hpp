@@ -12,7 +12,7 @@ class UBO
 public:
     /// Allocates a GPU buffer of the given size.  The buffer is left
     /// uninitialised until the first call to upload().
-    UBO(GLsizeiptr size, BufferUsage usage = BufferUsage::DynamicDraw);
+    UBO(GLsizeiptr size, EBufferUsage usage = EBufferUsage::DynamicDraw);
     ~UBO();
 
     UBO(const UBO&) = delete;

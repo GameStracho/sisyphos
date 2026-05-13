@@ -12,7 +12,7 @@ class SSBO
 public:
     /// Allocates a GPU buffer of the given size.  The buffer is left
     /// uninitialised until the first call to upload().
-    SSBO(GLsizeiptr size, BufferUsage usage = BufferUsage::DynamicDraw);
+    SSBO(GLsizeiptr size, EBufferUsage usage = EBufferUsage::DynamicDraw);
     ~SSBO();
 
     SSBO(const SSBO&) = delete;

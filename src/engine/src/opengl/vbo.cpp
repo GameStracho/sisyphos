@@ -47,7 +47,7 @@ void VBO::unbind() const
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-void VBO::upload(const void* data, GLsizeiptr size, BufferUsage usage)
+void VBO::upload(const void* data, GLsizeiptr size, EBufferUsage usage)
 {
     glNamedBufferData(m_id, size, data, static_cast<GLenum>(usage));
     spdlog::debug("VBO {} uploaded {} bytes", m_id, size);

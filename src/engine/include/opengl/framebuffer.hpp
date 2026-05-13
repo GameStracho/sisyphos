@@ -36,12 +36,12 @@ public:
     /// Attaches a texture as a color, depth, or stencil attachment.
     /// @param attachment  The attachment point to bind to.
     /// @param texture     The texture to attach.
-    void attachTexture(FramebufferAttachment attachment, const Texture& texture);
+    void attachTexture(EFramebufferAttachment attachment, const Texture& texture);
 
     /// Attaches a renderbuffer as a colour, depth, or stencil attachment.
     /// @param attachment   The attachment point to bind to.
     /// @param renderBuffer The renderbuffer to attach.
-    void attachRenderBuffer(FramebufferAttachment attachment, const RenderBuffer& renderBuffer);
+    void attachRenderBuffer(EFramebufferAttachment attachment, const RenderBuffer& renderBuffer);
 
     /// Returns true when the FBO is complete; logs an error and returns false otherwise.
     [[nodiscard]] bool isComplete() const;

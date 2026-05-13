@@ -34,7 +34,7 @@ public:
     /// @param normalized Whether fixed-point values should be normalised to [0,1] or [-1,1].
     /// @param stride     Byte distance between consecutive vertices (0 = tightly packed).
     /// @param offset     Byte offset of the first component within a single vertex.
-    void setAttribPointer(GLuint index, GLint size, AttribType type,
+    void setAttribPointer(GLuint index, GLint size, EAttribType type,
         bool normalized, GLsizei stride, const void* offset);
 
     /// Enables a vertex attribute so it is read during rendering.
