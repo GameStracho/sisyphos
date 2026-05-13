@@ -9,6 +9,7 @@
 #include "opengl/shader.hpp"
 #include "opengl/shaderprogram.hpp"
 #include "opengl/texture.hpp"
+#include "opengl/renderer.hpp"
 
 int main()
 {
@@ -59,13 +60,13 @@ int main()
     {
         window.pollEvents();
 
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        sisyphos::opengl::setClearColor(glm::vec4(0.1f, 0.1f, 0.1f, 1.0f));
+        sisyphos::opengl::clear(sisyphos::opengl::ClearBit::Color);
 
         texture.bind(0);
 
         vao.bind();
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        sisyphos::opengl::drawArrays(sisyphos::opengl::PrimitiveType::Triangles, 0, 3);
         vao.unbind();
 
         window.swapBuffers();

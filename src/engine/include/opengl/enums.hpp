@@ -120,4 +120,33 @@ enum class AttribType : GLenum
     Double = GL_DOUBLE,
 };
 
+// ---------------------------------------------------------------------------
+// Primitive type for draw calls
+// ---------------------------------------------------------------------------
+enum class PrimitiveType : GLenum
+{
+    Points = GL_POINTS,
+    Lines = GL_LINES,
+    LineStrip = GL_LINE_STRIP,
+    LineLoop = GL_LINE_LOOP,
+    Triangles = GL_TRIANGLES,
+    TriangleStrip = GL_TRIANGLE_STRIP,
+    TriangleFan = GL_TRIANGLE_FAN,
+};
+
+// ---------------------------------------------------------------------------
+// Framebuffer clear mask — values can be combined with |
+// ---------------------------------------------------------------------------
+enum class ClearBit : GLbitfield
+{
+    Color = GL_COLOR_BUFFER_BIT,
+    Depth = GL_DEPTH_BUFFER_BIT,
+    Stencil = GL_STENCIL_BUFFER_BIT,
+};
+
+inline ClearBit operator|(ClearBit a, ClearBit b)
+{
+    return static_cast<ClearBit>(static_cast<GLbitfield>(a) | static_cast<GLbitfield>(b));
+}
+
 } // namespace sisyphos::opengl
