@@ -104,4 +104,19 @@ enum class RenderbufferFormat : GLenum
     DepthComponent24 = GL_DEPTH_COMPONENT24,
 };
 
+// ---------------------------------------------------------------------------
+// Vertex attribute component type (used by VAO::setAttribPointer)
+// ---------------------------------------------------------------------------
+enum class AttribType : GLenum
+{
+    Byte = GL_BYTE,
+    UnsignedByte = GL_UNSIGNED_BYTE,
+    Short = GL_SHORT,
+    UnsignedShort = GL_UNSIGNED_SHORT,
+    Int = GL_INT,
+    UnsignedInt = GL_UNSIGNED_INT,
+    Float = GL_FLOAT,
+    Double = GL_DOUBLE,
+};
+
 } // namespace sisyphos::opengl

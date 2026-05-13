@@ -19,16 +19,16 @@ public:
     void bind() const;
     void unbind() const;
 
-    /// Define how a vertex attribute reads from the currently bound VBO.
+    /// Defines how a vertex attribute reads from the currently bound VBO.
+    /// Must be called while this VAO and the source VBO are both bound.
     /// @param index      Attribute location (matches layout(location = N) in GLSL).
-    /// @param size       Number of components (1–4).
-    /// @param type       Component type (e.g. GL_FLOAT).
-    /// @param normalized Whether fixed-point values should be normalised.
-    /// @param stride     Byte offset between consecutive vertices (0 = tightly packed).
-    /// @param offset     Byte offset of the first component within a vertex.
-    void setAttribPointer(GLuint index, GLint size, GLenum type,
-                          GLboolean normalized, GLsizei stride,
-                          const void* offset);
+    /// @param size       Number of components per vertex (1–4).
+    /// @param type       Component data type.
+    /// @param normalized Whether fixed-point values should be normalised to [0,1] or [-1,1].
+    /// @param stride     Byte distance between consecutive vertices (0 = tightly packed).
+    /// @param offset     Byte offset of the first component within a single vertex.
+    void setAttribPointer(GLuint index, GLint size, AttribType type,
+        bool normalized, GLsizei stride, const void* offset);
 
     /// Enable a vertex attribute.
     /// @param index      Attribute location (matches layout(location = N) in GLSL).

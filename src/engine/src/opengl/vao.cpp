@@ -46,11 +46,10 @@ void VAO::unbind() const
     glBindVertexArray(0);
 }
 
-void VAO::setAttribPointer(GLuint index, GLint size, GLenum type,
-                            GLboolean normalized, GLsizei stride,
-                            const void* offset)
+void VAO::setAttribPointer(GLuint index, GLint size, AttribType type,
+    bool normalized, GLsizei stride, const void* offset)
 {
-    glVertexAttribPointer(index, size, type, normalized, stride, offset);
+    glVertexAttribPointer(index, size, static_cast<GLenum>(type), normalized ? GL_TRUE : GL_FALSE, stride, offset);
 }
 
 void VAO::enableAttrib(GLuint index)

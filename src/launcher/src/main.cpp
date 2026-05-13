@@ -35,12 +35,12 @@ int main()
     vbo.upload(vertices, sizeof(vertices));
 
     // attribute 0 — position
-    vao.setAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+    vao.setAttribPointer(0, 3, sisyphos::opengl::AttribType::Float, false,
                          5 * sizeof(float), reinterpret_cast<const void*>(0));
     vao.enableAttrib(0);
 
     // attribute 1 — UV
-    vao.setAttribPointer(1, 2, GL_FLOAT, GL_FALSE,
+    vao.setAttribPointer(1, 2, sisyphos::opengl::AttribType::Float, false,
                          5 * sizeof(float), reinterpret_cast<const void*>(3 * sizeof(float)));
     vao.enableAttrib(1);
 
