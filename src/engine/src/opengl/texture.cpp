@@ -6,12 +6,13 @@
 
 #include <stdexcept>
 
-namespace sisyphos::opengl {
+namespace sisyphos::opengl
+{
 
 Texture::Texture(
     const std::filesystem::path& path,
-    TextureTarget                target,
-    bool                         flipVertically)
+    TextureTarget target,
+    bool flipVertically)
     : m_target(target)
 {
     spdlog::debug("Loading texture: {}", path.string());

@@ -1,7 +1,8 @@
 #include "opengl/vao.hpp"
 #include <spdlog/spdlog.h>
 
-namespace sisyphos::opengl {
+namespace sisyphos::opengl
+{
 
 VAO::VAO()
 {
@@ -29,8 +30,8 @@ VAO& VAO::operator=(VAO&& other) noexcept
     {
         if (m_id)
             glDeleteVertexArrays(1, &m_id);
-        
-        m_id       = other.m_id;
+
+        m_id = other.m_id;
         other.m_id = 0;
     }
     return *this;

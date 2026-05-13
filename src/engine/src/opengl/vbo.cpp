@@ -1,7 +1,8 @@
 #include "opengl/vbo.hpp"
 #include <spdlog/spdlog.h>
 
-namespace sisyphos::opengl {
+namespace sisyphos::opengl
+{
 
 VBO::VBO()
 {

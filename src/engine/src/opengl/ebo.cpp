@@ -1,7 +1,8 @@
 #include "opengl/ebo.hpp"
 #include <spdlog/spdlog.h>
 
-namespace sisyphos::opengl {
+namespace sisyphos::opengl
+{
 
 EBO::EBO()
 {

@@ -6,9 +6,11 @@
 #include <stdexcept>
 #include <string>
 
-namespace sisyphos::opengl {
+namespace sisyphos::opengl
+{
 
-namespace {
+namespace
+{
 
 std::string loadFile(const std::filesystem::path& path)
 {

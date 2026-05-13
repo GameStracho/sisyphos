@@ -2,21 +2,28 @@
 
 #include <glad/glad.h>
 
-namespace sisyphos::opengl {
+#include "opengl/enums.hpp"
+
+namespace sisyphos::opengl
+{
 
 class VAO
 {
 public:
+    /// Creates and allocates an OpenGL vertex array object.
     VAO();
     ~VAO();
 
-    VAO(const VAO&)            = delete;
+    VAO(const VAO&) = delete;
     VAO& operator=(const VAO&) = delete;
 
     VAO(VAO&&) noexcept;
     VAO& operator=(VAO&&) noexcept;
 
+    /// Binds this VAO, making it the active vertex array.
     void bind() const;
+
+    /// Unbinds the currently bound VAO (binds VAO 0).
     void unbind() const;
 
     /// Defines how a vertex attribute reads from the currently bound VBO.
@@ -30,10 +37,11 @@ public:
     void setAttribPointer(GLuint index, GLint size, AttribType type,
         bool normalized, GLsizei stride, const void* offset);
 
-    /// Enable a vertex attribute.
-    /// @param index      Attribute location (matches layout(location = N) in GLSL).
+    /// Enables a vertex attribute so it is read during rendering.
+    /// @param index  Attribute location (matches layout(location = N) in GLSL).
     void enableAttrib(GLuint index);
 
+    /// Returns the underlying OpenGL object ID.
     [[nodiscard]] GLuint getId() const { return m_id; }
 
 private:

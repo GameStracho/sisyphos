@@ -6,7 +6,8 @@
 
 #include <glm/gtc/type_ptr.hpp>
 
-namespace sisyphos::opengl {
+namespace sisyphos::opengl
+{
 
 ShaderProgram::ShaderProgram(std::initializer_list<GLuint> shaderIds)
 {
