@@ -8,11 +8,7 @@ RenderBuffer::RenderBuffer(RenderbufferFormat format, int width, int height)
     : m_format(format), m_width(width), m_height(height)
 {
     glGenRenderbuffers(1, &m_id);
-
-    glBindRenderbuffer(GL_RENDERBUFFER, m_id);
-    glRenderbufferStorage(GL_RENDERBUFFER, static_cast<GLenum>(m_format), m_width, m_height);
-    glBindRenderbuffer(GL_RENDERBUFFER, 0);
-
+    glNamedRenderbufferStorage(m_id, static_cast<GLenum>(m_format), m_width, m_height);
     spdlog::debug("RenderBuffer {} created ({}x{})", m_id, m_width, m_height);
 }
 
@@ -61,10 +57,7 @@ void RenderBuffer::resize(int width, int height)
     m_width  = width;
     m_height = height;
 
-    glBindRenderbuffer(GL_RENDERBUFFER, m_id);
-    glRenderbufferStorage(GL_RENDERBUFFER, static_cast<GLenum>(m_format), m_width, m_height);
-    glBindRenderbuffer(GL_RENDERBUFFER, 0);
-
+    glNamedRenderbufferStorage(m_id, static_cast<GLenum>(m_format), m_width, m_height);
     spdlog::debug("RenderBuffer {} resized to {}x{}", m_id, m_width, m_height);
 }
 

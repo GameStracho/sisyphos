@@ -53,7 +53,7 @@ int main()
     sisyphos::opengl::Texture texture{"assets/test_texture.png"};
 
     program.use();
-    program.set(0, 0); // location 0 - texture
+    program.set<int>(0, 0); // location 0 - texture unit 0
 
     while (!window.shouldClose())
     {

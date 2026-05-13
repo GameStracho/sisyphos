@@ -7,11 +7,7 @@ namespace sisyphos::opengl
 SSBO::SSBO(GLsizeiptr size, BufferUsage usage)
 {
     glGenBuffers(1, &m_id);
-
-    glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_id);
-    glBufferData(GL_SHADER_STORAGE_BUFFER, size, nullptr, static_cast<GLenum>(usage));
-    glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
-
+    glNamedBufferData(m_id, size, nullptr, static_cast<GLenum>(usage));
     spdlog::debug("SSBO {} created ({} bytes)", m_id, size);
 }
 
@@ -59,9 +55,7 @@ void SSBO::bindBase(GLuint bindingPoint) const
 
 void SSBO::upload(const void* data, GLsizeiptr size, GLintptr offset) const
 {
-    glBindBuffer(GL_SHADER_STORAGE_BUFFER, m_id);
-    glBufferSubData(GL_SHADER_STORAGE_BUFFER, offset, size, data);
-    glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
+    glNamedBufferSubData(m_id, offset, size, data);
 }
 
 } // namespace sisyphos::opengl

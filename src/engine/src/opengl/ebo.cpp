@@ -49,8 +49,7 @@ void EBO::unbind() const
 
 void EBO::upload(const void* data, GLsizeiptr size, BufferUsage usage)
 {
-    bind();
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, static_cast<GLenum>(usage));
+    glNamedBufferData(m_id, size, data, static_cast<GLenum>(usage));
     spdlog::debug("EBO {} uploaded {} bytes", m_id, size);
 }
 

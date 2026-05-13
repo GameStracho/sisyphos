@@ -7,11 +7,7 @@ namespace sisyphos::opengl
 UBO::UBO(GLsizeiptr size, BufferUsage usage)
 {
     glGenBuffers(1, &m_id);
-
-    glBindBuffer(GL_UNIFORM_BUFFER, m_id);
-    glBufferData(GL_UNIFORM_BUFFER, size, nullptr, static_cast<GLenum>(usage));
-    glBindBuffer(GL_UNIFORM_BUFFER, 0);
-
+    glNamedBufferData(m_id, size, nullptr, static_cast<GLenum>(usage));
     spdlog::debug("UBO {} created ({} bytes)", m_id, size);
 }
 
@@ -59,9 +55,7 @@ void UBO::bindBase(GLuint bindingPoint) const
 
 void UBO::upload(const void* data, GLsizeiptr size, GLintptr offset) const
 {
-    glBindBuffer(GL_UNIFORM_BUFFER, m_id);
-    glBufferSubData(GL_UNIFORM_BUFFER, offset, size, data);
-    glBindBuffer(GL_UNIFORM_BUFFER, 0);
+    glNamedBufferSubData(m_id, offset, size, data);
 }
 
 } // namespace sisyphos::opengl

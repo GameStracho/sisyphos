@@ -56,30 +56,17 @@ void Framebuffer::unbind() const
 
 void Framebuffer::attachTexture(FramebufferAttachment attachment, const Texture& texture)
 {
-    glBindFramebuffer(GL_FRAMEBUFFER, m_id);
-    glFramebufferTexture2D(GL_FRAMEBUFFER,
-                           static_cast<GLenum>(attachment),
-                           GL_TEXTURE_2D,
-                           texture.getId(),
-                           0);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glNamedFramebufferTexture(m_id, static_cast<GLenum>(attachment), texture.getId(), 0);
 }
 
 void Framebuffer::attachRenderBuffer(FramebufferAttachment attachment, const RenderBuffer& renderBuffer)
 {
-    glBindFramebuffer(GL_FRAMEBUFFER, m_id);
-    glFramebufferRenderbuffer(GL_FRAMEBUFFER,
-                              static_cast<GLenum>(attachment),
-                              GL_RENDERBUFFER,
-                              renderBuffer.getId());
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glNamedFramebufferRenderbuffer(m_id, static_cast<GLenum>(attachment), GL_RENDERBUFFER, renderBuffer.getId());
 }
 
 bool Framebuffer::isComplete() const
 {
-    glBindFramebuffer(GL_FRAMEBUFFER, m_id);
-    const GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
-    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    const GLenum status = glCheckNamedFramebufferStatus(m_id, GL_FRAMEBUFFER);
 
     if (status != GL_FRAMEBUFFER_COMPLETE)
     {
