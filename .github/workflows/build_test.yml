@@ -143,3 +143,5 @@ jobs:
           git add CMakeLists.txt vcpkg.json
           git diff --staged --quiet || git commit -m "chore: bump version to ${{ steps.tag.outputs.new_tag }} [skip ci]"
           git push
+          git tag ${{ steps.tag.outputs.new_tag }} || echo "Tag already exists, skipping"
+          git push origin ${{ steps.tag.outputs.new_tag }} || echo "Tag already pushed, skipping"
