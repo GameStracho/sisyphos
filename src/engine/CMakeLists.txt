@@ -26,7 +26,12 @@ target_link_libraries(sisyphos_engine
         cereal::cereal
         nlohmann_json::nlohmann_json
         spdlog::spdlog
+        glm::glm
         sisyphos_sanitizers
 )
 
-target_include_directories(sisyphos_engine PUBLIC ${LUA_INCLUDE_DIR})
+target_include_directories(sisyphos_engine
+    PUBLIC
+        ${LUA_INCLUDE_DIR}
+        ${Stb_INCLUDE_DIR}
+)
