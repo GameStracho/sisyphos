@@ -22,6 +22,8 @@
     "cereal",
     "nlohmann-json",
     "spdlog",
+    "stb",
+    "glm",
     "gtest"
   ]
 }

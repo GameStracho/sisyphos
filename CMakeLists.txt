@@ -60,6 +60,8 @@ find_package(assimp       CONFIG REQUIRED)
 find_package(cereal       CONFIG REQUIRED)
 find_package(nlohmann_json CONFIG REQUIRED)
 find_package(spdlog       CONFIG REQUIRED)
+find_package(Stb          REQUIRED)
+find_package(glm          CONFIG REQUIRED)
 
 # ---------------------------------------------------------------------------
 # Targets
